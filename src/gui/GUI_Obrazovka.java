@@ -6,6 +6,8 @@
 package gui;
 
 import java.awt.Color;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 import javax.swing.JOptionPane;
 
 /**
@@ -55,8 +57,8 @@ public class GUI_Obrazovka extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Reťazec");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, -1));
+        jLabel1.setText("Regex reťazec");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
 
         retazec.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jPanel1.add(retazec, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 540, 50));
@@ -101,6 +103,9 @@ public class GUI_Obrazovka extends javax.swing.JFrame {
         }
         else{
             try{
+                // podľa : https://stackoverflow.com/questions/2704857/how-to-check-if-a-given-regex-is-valid
+                Pattern.compile(retazec.getText());
+                
                 boolean vysledok = textKontrola.getText().matches(retazec.getText());
                 
                 if(vysledok){
@@ -110,9 +115,9 @@ public class GUI_Obrazovka extends javax.swing.JFrame {
                     vyhodnotNespravne();
                 }
 
-            }catch(Exception e){
+            }catch(PatternSyntaxException exception){
                 vysledok.setText("");
-                JOptionPane.showMessageDialog(this, e.getMessage(), "Chyba", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Zadaný regex nie je platný", "Chyba", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnKontrolaMouseReleased
