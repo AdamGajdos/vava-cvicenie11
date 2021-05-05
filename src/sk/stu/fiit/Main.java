@@ -16,6 +16,8 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        gui.GUI_Obrazovka aplikacia = new gui.GUI_Obrazovka();
+        aplikacia.setVisible(true);
     }
     
 }
